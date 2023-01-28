@@ -1,6 +1,6 @@
 <div align="center">
 
-# ROS1 <-> YOLOv7
+# YOLOv7 with ROS1
 
 ![Ubuntu 20.04](https://img.shields.io/badge/Ubuntu-20.04-blue?style=flat-square&logo=Ubuntu&logoColor=FFFFFF)
 ![Ros Noetic](https://img.shields.io/badge/Ros-Noetic-blue?style=flat-square&logo=ROS)
@@ -50,24 +50,18 @@ install them as
 cd src/yolov7-ros/
 pip install -r requirements.txt
 ```
-테스트용 가중치 파일 다운로드 (default는 2번으로 작성됨)
+테스트용 가중치 파일 다운로드 (default는 1번으로 작성됨)
 1. [yolov7.pt](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt)   
-
-by [WongKinYiu/yolov7](https://github.com/WongKinYiu/yolov7).
+by [WongKinYiu/yolov7](https://github.com/WongKinYiu/yolov7).   
 2. [berkeley_yolov7.pt](https://drive.google.com/drive/folders/1OfC1dQx2db0dmmQA15_WScUptbYcfsZ8?usp=sharing)   
+by [berkeley.edu](https://bdd-data.berkeley.edu/)   
 
-by [berkeley.edu](https://bdd-data.berkeley.edu/)
-
-- 다운받은 가중치 파일 넣기
-[yolov7.pt]()  or  [berkeley_yolov7.pt]()  -> [yolov7-ros/weights]()  
-
-The package has been tested under Ubuntu 20.04 and Python 3.8.10.
+- 다운받은 가중치 파일 넣기   
+[yolov7.pt]()  or  [berkeley_yolov7.pt]()  -> [yolov7-ros/weights]()
 
 ## :clipboard: Usage
 Before you launch the node, adjust the parameters in the [launch file](launch/yolov7.launch).   
-
 For example, you need to set the path to your YOLOv7 weights and the image topic to which this node should listen to.   
-
 The launch file also contains a description for each parameter.   
 
 - [launch/yolov7.launch]() for developer
