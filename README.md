@@ -49,8 +49,6 @@ install them as
 ```shell
 cd src/yolov7-ros/
 pip install -r requirements.txt
-pip install --upgrade numpy
-pip install scipy
 sudo apt install ros-noetic-opencv*
 ```
 테스트용 가중치 파일 다운로드 (default는 1번으로 작성됨)
@@ -72,7 +70,6 @@ The launch file also contains a description for each parameter.
 2. param name="classes_path" value="사용할 txt 파일"
 3. param name="img_topic" value="받아올 rostopic 경로"
 4. param name="device" value="cuda or cpu 환경에 맞게 선택"
-
 ```shell
 roslaunch yolov7_ros yolov7.launch
 ```

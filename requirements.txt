@@ -6,3 +6,5 @@ thop
 requests
 tqdm
 pyyaml
+numpy>=1.23.5
+scipy>=1.10.0
