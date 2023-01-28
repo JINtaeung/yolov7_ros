@@ -49,6 +49,9 @@ install them as
 ```shell
 cd src/yolov7-ros/
 pip install -r requirements.txt
+pip install --upgrade numpy
+pip install scipy
+sudo apt install ros-noetic-opencv*
 ```
 테스트용 가중치 파일 다운로드 (default는 1번으로 작성됨)
 1. [yolov7.pt](https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt)   
