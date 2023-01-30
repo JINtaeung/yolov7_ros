@@ -1,4 +1,4 @@
-person
+pad
 bicycle
 car
 motorcycle

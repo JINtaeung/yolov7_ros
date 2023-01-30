@@ -120,6 +120,7 @@ class Yolov7Publisher:
         self.detection_publisher = rospy.Publisher(
             pub_topic, Detection2DArray, queue_size=queue_size
         )
+
         rospy.loginfo("YOLOv7 initialization complete. Ready to start inference")
 
     def process_img_msg(self, img_msg: Image):
