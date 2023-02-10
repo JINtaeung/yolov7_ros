@@ -16,6 +16,7 @@ import rospy
 
 from vision_msgs.msg import Detection2DArray, Detection2D, BoundingBox2D
 from sensor_msgs.msg import Image
+from geometry_msgs.msg import Point32
 from cv_bridge import CvBridge
 
 
@@ -106,6 +107,12 @@ class Yolov7Publisher:
         self.visualization_publisher = rospy.Publisher(
             vis_topic, Image, queue_size=queue_size
         ) if visualize else None
+        
+        det_topic = pub_topic + "detection" if pub_topic.endswith("/") else \
+            pub_topic + "/detection"
+        self.detection_publisher = rospy.Publisher(
+            det_topic, Point32, queue_size=queue_size
+        )
 
         self.bridge = CvBridge()
 
@@ -117,9 +124,12 @@ class Yolov7Publisher:
         self.img_subscriber = rospy.Subscriber(
             img_topic, Image, self.process_img_msg
         )
-        self.detection_publisher = rospy.Publisher(
-            pub_topic, Detection2DArray, queue_size=queue_size
+        self.img_subscriber = rospy.Subscriber(
+            det_topic, Point32
         )
+        # self.detection_publisher = rospy.Publisher(
+        #     pub_topic, Detection2DArray, queue_size=queue_size
+        # )
 
         rospy.loginfo("YOLOv7 initialization complete. Ready to start inference")
 
@@ -150,12 +160,23 @@ class Yolov7Publisher:
         detections = self.model.inference(img)
         detections[:, :4] = rescale(
             [h_scaled, w_scaled], detections[:, :4], [h_orig, w_orig])
-        detections[:, :4] = detections[:, :4].round()
+        # detections[:, :4] = detections[:, :4].round()
 
         # publishing
-        detection_msg = create_detection_msg(img_msg, detections)
-        self.detection_publisher.publish(detection_msg)
-
+        # detection_msg = create_detection_msg(img_msg, detections)
+        # self.detection_publisher.publish(detection_msg)
+        for detection in detections:
+            x1, y1, x2, y2 = detection[:4].tolist()
+            bbox = BoundingBox2D()
+            w = x2 - x1
+            h = y2 - y1
+            cx = x1 + w / 2
+            cy = y1 + h / 2
+            bbox.center = Point32()
+            bbox.center.x = cx
+            bbox.center.y = cy
+            self.detection_publisher.publish(bbox.center)
+            
         # visualizing if required
         if self.visualization_publisher:
             bboxes = [[int(x1), int(y1), int(x2), int(y2)]
