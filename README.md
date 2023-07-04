@@ -83,7 +83,7 @@ sudo apt-get install ros-noetic-rqt*
 rviz
 ```
 rviz 좌측 하단 add - by topic - /yolov7 - visualization - image
-## :satellite: Outpit Rostopic
+## :satellite: Output Rostopic
 - [launch/yolov7.launch]() param name="out_topic" value="`example`" 일때 output topic은 /yolov7/`example`
 - using the [vision_msgs/Detection2DArray](http://docs.ros.org/en/api/vision_msgs/html/msg/Detection2DArray.html) message type.
 - [launch/yolov7.launch]() param name="visualize" value="true" 일때 `/yolov7/example/visualization` 도 rostopic으로 넘어옴.
