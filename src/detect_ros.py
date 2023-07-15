@@ -122,7 +122,7 @@ class Yolov7Publisher:
             device=device
         )
         self.img_subscriber = rospy.Subscriber(
-            img_topic, Image, self.process_img_msg
+            img_topic, Image, self.process_img_msg, queue_size=1, buff_size=80000000
         )
         self.img_subscriber = rospy.Subscriber(
             det_topic, Point32
